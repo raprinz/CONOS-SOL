@@ -56,6 +56,19 @@ a {
 }
 
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+
+    outline: 3px solid rgba(245, 166, 35, .75);
+
+    outline-offset: 3px;
+
+}
+
+
 button,
 input,
 textarea,
@@ -192,6 +205,12 @@ select {
 
     font-size: 14px;
 
+    padding: 8px 2px;
+
+    border-bottom: 2px solid transparent;
+
+    transition: color .2s, border-color .2s;
+
 }
 
 
@@ -295,19 +314,13 @@ select {
 
     align-items: center;
 
-    background:
+    position: relative;
 
-        linear-gradient(
-            90deg,
-            rgba(32, 42, 54, .95),
-            rgba(32, 42, 54, .60)
-        ),
+    overflow: hidden;
 
-        url("../img/conos.jpg");
+    isolation: isolate;
 
-    background-size: cover;
-
-    background-position: center;
+    background: var(--dark) url("../img/conos/cono-especial.jpg") center / cover;
 
     color: white;
 
@@ -323,7 +336,11 @@ select {
 
     margin: auto;
 
-    max-width: 700px;
+    max-width: 1400px;
+
+    position: relative;
+
+    z-index: 2;
 
 }
 
@@ -1355,6 +1372,8 @@ select {
 
     border-radius: 8px;
 
+    box-shadow: 0 14px 35px rgba(32, 42, 54, .08);
+
 }
 
 
@@ -1408,6 +1427,8 @@ select {
 
     border-color:
         var(--primary);
+
+    box-shadow: 0 0 0 3px rgba(245, 166, 35, .18);
 
 }
 
@@ -1727,6 +1748,292 @@ select {
 }
 
 
+.company-contact-section {
+
+    width: min(1100px, 94%);
+
+    margin: 0 auto 70px;
+
+    display: grid;
+
+    grid-template-columns: .9fr 1.1fr;
+
+    min-height: 420px;
+
+    border: 1px solid var(--light-gray);
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    background: white;
+
+    box-shadow: 0 14px 35px rgba(32, 42, 54, .07);
+
+}
+
+
+.company-contact-card {
+
+    padding: 50px;
+
+    background: var(--cream);
+
+}
+
+
+.company-contact-card h2 {
+
+    margin: 8px 0 14px;
+
+    font-size: 32px;
+
+    line-height: 1.2;
+
+}
+
+
+.company-contact-card > p {
+
+    color: var(--gray);
+
+    margin-bottom: 18px;
+
+}
+
+
+.map-link,
+.company-phone a {
+
+    color: var(--primary-dark);
+
+    font-weight: bold;
+
+}
+
+
+.company-phone {
+
+    margin-top: 28px;
+
+}
+
+
+.social-links {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+}
+
+
+.social-links a {
+
+    padding: 8px 13px;
+
+    border: 1px solid var(--primary);
+
+    border-radius: 999px;
+
+    color: var(--dark);
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+}
+
+
+.social-links a:hover {
+
+    background: var(--primary);
+
+}
+
+
+.company-map {
+
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 420px;
+
+    border: 0;
+
+}
+
+
+.header-actions a[aria-current="page"] {
+
+    color: var(--primary);
+
+    border-bottom-color: var(--primary);
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-video {
+
+        display: none;
+
+    }
+
+}
+
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    z-index: 1;
+
+    inset: 0;
+
+    background: linear-gradient(
+        90deg,
+        rgba(32, 42, 54, .94),
+        rgba(32, 42, 54, .64) 58%,
+        rgba(32, 42, 54, .28)
+    );
+
+}
+
+
+.hero-video {
+
+    position: absolute;
+
+    z-index: 0;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+}
+
+
+.contact-whatsapp-link {
+
+    display: inline-flex;
+
+    margin-top: 8px;
+
+    color: var(--primary-dark);
+
+    font-weight: bold;
+
+}
+
+
+.site-notification {
+
+    position: fixed;
+
+    z-index: 20;
+
+    right: 24px;
+
+    bottom: 86px;
+
+    max-width: min(360px, calc(100% - 48px));
+
+    padding: 14px 18px;
+
+    border-radius: 8px;
+
+    background: var(--dark);
+
+    color: white;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .2);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform: translateY(12px);
+
+    transition: opacity .2s, transform .2s;
+
+}
+
+
+.site-notification.is-visible {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+
+.floating-whatsapp {
+
+    position: fixed;
+
+    z-index: 19;
+
+    right: 24px;
+
+    bottom: 24px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 13px 18px;
+
+    border-radius: 999px;
+
+    background: #25d366;
+
+    color: #073b1b;
+
+    font-weight: bold;
+
+    box-shadow: 0 12px 26px rgba(10, 84, 36, .3);
+
+    transition: transform .2s, box-shadow .2s;
+
+}
+
+
+.floating-whatsapp span:first-child {
+
+    font-size: 22px;
+
+    line-height: 1;
+
+}
+
+
+.floating-whatsapp:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 16px 32px rgba(10, 84, 36, .38);
+
+}
+
+
 .cart-summary {
 
     padding: 25px;
@@ -1958,7 +2265,8 @@ select {
 
     .info-section,
     .content-section,
-    .contact-section {
+    .contact-section,
+    .company-contact-section {
 
         grid-template-columns:
             1fr;
@@ -1988,6 +2296,29 @@ select {
 
 
 @media (max-width: 700px) {
+
+    .hero {
+
+        min-height: 440px;
+
+        background-position: 70% center;
+
+    }
+
+
+    .company-contact-card {
+
+        padding: 40px;
+
+    }
+
+
+    .hero h1,
+    .page-banner h1 {
+
+        font-size: 38px;
+
+    }
 
     .header-actions {
 
@@ -2053,6 +2384,40 @@ select {
 
         grid-template-columns:
             1fr;
+
+    }
+
+
+    .company-contact-card {
+
+        padding: 32px 25px;
+
+    }
+
+
+    .company-map {
+
+        min-height: 320px;
+
+    }
+
+
+    .floating-whatsapp-text {
+
+        display: none;
+
+    }
+
+
+    .floating-whatsapp {
+
+        width: 54px;
+
+        height: 54px;
+
+        justify-content: center;
+
+        padding: 0;
 
     }
 

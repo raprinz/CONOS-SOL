@@ -30,12 +30,20 @@
                     placeholder="Buscar productos..."
                 >
 
-                <button onclick="buscarDesdeInicio()">
+                <button onclick="buscarDesdeInicio()" aria-label="Buscar productos">
                     🔍
                 </button>
             </div>
 
             <nav class="header-actions">
+
+                <a href="index.html">
+                    Inicio
+                </a>
+
+                <a href="pages/productos.html">
+                    Productos
+                </a>
 
                 <a href="pages/nosotros.html">
                     Nosotros
@@ -58,57 +66,25 @@
 
 
     <!-- =========================
-         MENÚ PRINCIPAL
-    ========================== -->
-
-    <nav class="main-nav">
-
-        <div class="nav-container">
-
-            <a href="index.html">
-                Inicio
-            </a>
-
-            <a href="pages/productos.html">
-                Productos
-            </a>
-
-            <a href="pages/productos.html?categoria=conos">
-                Conos
-            </a>
-
-            <a href="pages/productos.html?categoria=canastillas">
-                Canastillas
-            </a>
-
-            <a href="pages/productos.html?categoria=barquillos">
-                Barquillos
-            </a>
-
-            <a href="pages/productos.html?categoria=galletas">
-                Galletas
-            </a>
-
-            <a href="pages/productos.html?categoria=obleas">
-                Obleas
-            </a>
-
-            <a href="pages/productos.html?categoria=porta-cono">
-                Porta Cono
-            </a>
-
-        </div>
-
-    </nav>
-
-
-    <!-- =========================
          BANNER PRINCIPAL
     ========================== -->
 
     <main>
 
         <section class="hero">
+
+            <video
+                class="hero-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="img/conos/cono-especial.jpg"
+                aria-hidden="true"
+            >
+                <source src="img/Portada/Portada%201%20Inicio.mp4" type="video/mp4">
+            </video>
 
             <div class="hero-content">
 
@@ -320,8 +296,8 @@
                 </div>
 
                 <div>
-                    <strong>INVIMA</strong>
-                    <span>Productos certificados</span>
+                    <strong>Calidad</strong>
+                    <span>Elaboración cuidadosa</span>
                 </div>
 
                 <div>

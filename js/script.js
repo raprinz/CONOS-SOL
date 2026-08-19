@@ -254,8 +254,29 @@ const productos = [
    CARRITO
 ========================================================= */
 
-let carrito =
-    JSON.parse(localStorage.getItem("conosSolCarrito")) || [];
+let carrito = cargarCarrito();
+let productosVisibles = [...productos];
+
+function cargarCarrito() {
+    try {
+        const guardado = JSON.parse(localStorage.getItem("conosSolCarrito"));
+
+        if (!Array.isArray(guardado)) {
+            return [];
+        }
+
+        return guardado
+            .filter(item => productos.some(producto => producto.id === item.id))
+            .map(item => ({
+                id: item.id,
+                cantidad: Number.isInteger(item.cantidad) && item.cantidad > 0
+                    ? item.cantidad
+                    : 1
+            }));
+    } catch {
+        return [];
+    }
+}
 
 
 /* =========================================================
@@ -265,6 +286,10 @@ let carrito =
 document.addEventListener("DOMContentLoaded", function () {
 
     actualizarContadorCarrito();
+
+    actualizarNavegacionActiva();
+
+    crearBotonWhatsApp();
 
     if (
         document.getElementById("contenedorProductos")
@@ -292,7 +317,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+    document.querySelectorAll("#searchHome, #searchProducts").forEach(input => {
+        input.addEventListener("keydown", event => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                input.id === "searchHome"
+                    ? buscarDesdeInicio()
+                    : buscarProductos();
+            }
+        });
+    });
+
 });
+
+
+function actualizarNavegacionActiva() {
+    const paginaActual = window.location.pathname.split("/").pop() || "index.html";
+
+    document.querySelectorAll(".header-actions a").forEach(enlace => {
+        const destino = enlace.getAttribute("href").split("/").pop();
+
+        if (destino === paginaActual) {
+            enlace.setAttribute("aria-current", "page");
+        }
+    });
+}
+
+
+function crearBotonWhatsApp() {
+    if (document.getElementById("floatingWhatsApp")) {
+        return;
+    }
+
+    const boton = document.createElement("a");
+    boton.id = "floatingWhatsApp";
+    boton.className = "floating-whatsapp";
+    boton.href = "https://api.whatsapp.com/send/?phone=573203919420&text&type=phone_number&app_absent=0";
+    boton.target = "_blank";
+    boton.rel = "noopener noreferrer";
+    boton.setAttribute("aria-label", "Escribir a Conos Sol por WhatsApp");
+    boton.title = "Escríbenos por WhatsApp";
+    boton.innerHTML = '<span aria-hidden="true">✆</span><span class="floating-whatsapp-text">WhatsApp</span>';
+    document.body.appendChild(boton);
+}
 
 
 /* =========================================================
@@ -304,11 +371,18 @@ function inicializarCatalogo() {
     const parametros =
         new URLSearchParams(window.location.search);
 
-    const categoria =
-        parametros.get("categoria");
+    const categoria = parametros.get("categoria");
+    const busqueda = parametros.get("buscar");
 
+    if (busqueda) {
+        const input = document.getElementById("searchProducts");
 
-    if (categoria) {
+        if (input) {
+            input.value = busqueda;
+        }
+
+        buscarProductos();
+    } else if (categoria) {
 
         mostrarCategoria(categoria);
 
@@ -344,6 +418,18 @@ function mostrarCategoria(categoria) {
     let productosMostrar;
 
 
+    const categoriasValidas = ["todos", "conos", "canastillas", "barquillos", "galletas", "obleas", "porta-cono"];
+
+    if (!categoriasValidas.includes(categoria)) {
+        categoria = "todos";
+    }
+
+    const input = document.getElementById("searchProducts");
+
+    if (input) {
+        input.value = "";
+    }
+
     if (categoria === "todos") {
 
         productosMostrar = [...productos];
@@ -370,6 +456,8 @@ function mostrarCategoria(categoria) {
 
     }
 
+
+    productosVisibles = productosMostrar;
 
     if (cantidad) {
 
@@ -411,6 +499,15 @@ function obtenerNombreCategoria(categoria) {
 
 
     return nombres[categoria] || "Productos";
+
+}
+
+
+function mostrarDato(valor, etiqueta) {
+
+    return /pendiente/i.test(valor)
+        ? `Consulta ${etiqueta.toLowerCase()} disponibles`
+        : valor;
 
 }
 
@@ -577,6 +674,8 @@ function renderizarProductos(lista) {
                     src="${rutaImagen}"
                     alt="${producto.nombre}"
                     class="product-image"
+                    loading="lazy"
+                    decoding="async"
                     onerror="imagenNoDisponible(this)"
                 >
 
@@ -608,7 +707,7 @@ function renderizarProductos(lista) {
 
                     <p>
                         <strong>Medidas:</strong>
-                        ${producto.medidas}
+                        ${mostrarDato(producto.medidas, "medidas")}
                     </p>
 
                     <p>
@@ -618,7 +717,7 @@ function renderizarProductos(lista) {
 
                     <p>
                         <strong>Presentación:</strong>
-                        ${producto.presentacion}
+                        ${mostrarDato(producto.presentacion, "presentaciones")}
                     </p>
 
                 </div>
@@ -629,6 +728,7 @@ function renderizarProductos(lista) {
                     <button
                         class="btn-secondary"
                         onclick="verProducto(${producto.id})"
+                        aria-label="Ver detalles de ${producto.nombre}"
                     >
                         Ver detalles
                     </button>
@@ -637,6 +737,7 @@ function renderizarProductos(lista) {
                     <button
                         class="btn-primary"
                         onclick="agregarAlCarrito(${producto.id})"
+                        aria-label="Agregar ${producto.nombre} al carrito"
                     >
                         Agregar
                     </button>
@@ -738,8 +839,7 @@ function buscarProductos() {
     }
 
 
-    const resultados =
-        productos.filter(producto => {
+    const resultados = productos.filter(producto => {
 
             return (
 
@@ -779,6 +879,8 @@ function buscarProductos() {
 
     }
 
+
+    productosVisibles = resultados;
 
     if (cantidad) {
 
@@ -849,12 +951,7 @@ function ordenarProductos() {
         select.value;
 
 
-    const titulo =
-        document.getElementById("tituloCategoria");
-
-
-    let lista =
-        [...productos];
+    let lista = [...productosVisibles];
 
 
     if (opcion === "nombre") {
@@ -879,14 +976,7 @@ function ordenarProductos() {
     }
 
 
-    if (titulo) {
-
-        titulo.textContent =
-            "Productos ordenados";
-
-    }
-
-
+    productosVisibles = lista;
     renderizarProductos(lista);
 
 }
@@ -935,6 +1025,8 @@ function cargarProductosDestacados() {
                     src="${rutaImagen}"
                     alt="${producto.nombre}"
                     class="product-image"
+                    loading="lazy"
+                    decoding="async"
                     onerror="imagenNoDisponible(this)"
                 >
 
@@ -1020,21 +1112,7 @@ function agregarAlCarrito(id) {
 
     } else {
 
-        carrito.push({
-
-            id: producto.id,
-
-            nombre: producto.nombre,
-
-            categoria: producto.categoria,
-
-            imagen: producto.imagen,
-
-            presentacion: producto.presentacion,
-
-            cantidad: 1
-
-        });
+        carrito.push({ id: producto.id, cantidad: 1 });
 
     }
 
@@ -1044,9 +1122,7 @@ function agregarAlCarrito(id) {
     actualizarContadorCarrito();
 
 
-    alert(
-        `${producto.nombre} fue agregado al carrito.`
-    );
+    mostrarNotificacion(`${producto.nombre} fue agregado al carrito.`);
 
 }
 
@@ -1173,6 +1249,7 @@ function mostrarCarrito() {
                 <img
                     src="${BASE_PATH}${producto.imagen}"
                     alt="${producto.nombre}"
+                    loading="lazy"
                     onerror="imagenNoDisponible(this)"
                 >
 
@@ -1190,7 +1267,7 @@ function mostrarCarrito() {
                 </h3>
 
                 <p>
-                    ${producto.presentacion}
+                    ${mostrarDato(producto.presentacion, "presentaciones")}
                 </p>
 
             </div>
@@ -1200,6 +1277,7 @@ function mostrarCarrito() {
 
                 <button
                     onclick="cambiarCantidad(${item.id}, -1)"
+                    aria-label="Quitar una unidad de ${producto.nombre}"
                 >
                     −
                 </button>
@@ -1210,6 +1288,7 @@ function mostrarCarrito() {
 
                 <button
                     onclick="cambiarCantidad(${item.id}, 1)"
+                    aria-label="Agregar una unidad de ${producto.nombre}"
                 >
                     +
                 </button>
@@ -1220,6 +1299,7 @@ function mostrarCarrito() {
             <button
                 class="remove-button"
                 onclick="eliminarDelCarrito(${item.id})"
+                aria-label="Eliminar ${producto.nombre} del carrito"
             >
                 ✕
             </button>
@@ -1387,9 +1467,7 @@ function generarPedidoWhatsApp() {
 
     if (carrito.length === 0) {
 
-        alert(
-            "El carrito está vacío."
-        );
+        mostrarNotificacion("El carrito está vacío. Agrega productos para solicitar un pedido.");
 
         return;
 
@@ -1397,26 +1475,26 @@ function generarPedidoWhatsApp() {
 
 
     let mensaje =
-        "Hola, Conos Sol. Deseo solicitar información sobre los siguientes productos:%0A%0A";
+        "Hola, Conos Sol. Deseo solicitar información sobre los siguientes productos:\n\n";
 
 
     carrito.forEach(item => {
+        const producto = productos.find(producto => producto.id === item.id);
 
-        mensaje +=
-            `• ${item.nombre} - Cantidad: ${item.cantidad} - ${item.presentacion}%0A`;
+        if (producto) {
+            mensaje += `• ${producto.nombre} — Cantidad: ${item.cantidad} — ${mostrarDato(producto.presentacion, "presentaciones")}\n`;
+        }
 
     });
 
 
     mensaje +=
-        "%0AQuedo atento(a) a la cotización y disponibilidad.";
+        "\nQuedo atento(a) a la cotización y disponibilidad.";
 
 
     if (!WHATSAPP_NUMBER) {
 
-        alert(
-            "El número de WhatsApp todavía no ha sido configurado. Más adelante agregaremos el número de Conos Sol."
-        );
+        mostrarNotificacion("El número de WhatsApp todavía no está configurado.");
 
         return;
 
@@ -1424,7 +1502,7 @@ function generarPedidoWhatsApp() {
 
 
     window.open(
-        `https://wa.me/${WHATSAPP_NUMBER}?text=${mensaje}`,
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`,
         "_blank"
     );
 
@@ -1440,12 +1518,19 @@ function enviarFormulario(event) {
     event.preventDefault();
 
 
-    alert(
-        "Formulario recibido. La conexión con el correo o sistema de atención se configurará posteriormente."
+    const formulario = event.target;
+    const nombre = formulario.querySelector("#nombre").value.trim();
+    const telefono = formulario.querySelector("#telefono").value.trim();
+    const correo = formulario.querySelector("#correo").value.trim();
+    const mensaje = formulario.querySelector("#mensaje").value.trim();
+    const texto = `Hola, Conos Sol. Mi nombre es ${nombre}.\n\nTeléfono: ${telefono}\nCorreo: ${correo}\n\nMensaje:\n${mensaje}`;
+
+    window.open(
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`,
+        "_blank"
     );
 
-
-    event.target.reset();
+    mostrarNotificacion("Abrimos WhatsApp con tu mensaje listo para enviar.");
 
 }
 
@@ -1580,7 +1665,7 @@ function cargarDetalleProducto() {
                     </span>
 
                     <strong>
-                        ${producto.medidas}
+                        ${mostrarDato(producto.medidas, "medidas")}
                     </strong>
 
                 </div>
@@ -1606,7 +1691,7 @@ function cargarDetalleProducto() {
                     </span>
 
                     <strong>
-                        ${producto.presentacion}
+                        ${mostrarDato(producto.presentacion, "presentaciones")}
                     </strong>
 
                 </div>
@@ -1680,7 +1765,7 @@ function cargarDetalleProducto() {
     `;
 
 
-    cargarRelacionados(producto.categoria);
+    cargarRelacionados(producto.categoria, producto.id);
 
 }
 
@@ -1689,7 +1774,7 @@ function cargarDetalleProducto() {
    PRODUCTOS RELACIONADOS
 ========================================================= */
 
-function cargarRelacionados(categoria) {
+function cargarRelacionados(categoria, productoActualId) {
 
     const contenedor =
         document.getElementById(
@@ -1706,10 +1791,16 @@ function cargarRelacionados(categoria) {
         productos
             .filter(
                 producto =>
-                    producto.categoria === categoria
+                producto.categoria === categoria && producto.id !== productoActualId
             )
             .slice(0, 3);
 
+
+    const seccion = contenedor.closest("section");
+
+    if (seccion) {
+        seccion.hidden = relacionados.length === 0;
+    }
 
     relacionados.forEach(producto => {
 
@@ -1729,6 +1820,7 @@ function cargarRelacionados(categoria) {
                     src="${BASE_PATH}${producto.imagen}"
                     alt="${producto.nombre}"
                     class="product-image"
+                    loading="lazy"
                     onerror="imagenNoDisponible(this)"
                 >
 
@@ -1784,4 +1876,25 @@ if (
 
     cargarDetalleProducto();
 
+}
+
+function mostrarNotificacion(mensaje) {
+    let aviso = document.getElementById("siteNotification");
+
+    if (!aviso) {
+        aviso = document.createElement("div");
+        aviso.id = "siteNotification";
+        aviso.className = "site-notification";
+        aviso.setAttribute("role", "status");
+        aviso.setAttribute("aria-live", "polite");
+        document.body.appendChild(aviso);
+    }
+
+    aviso.textContent = mensaje;
+    aviso.classList.add("is-visible");
+
+    window.clearTimeout(mostrarNotificacion.timeout);
+    mostrarNotificacion.timeout = window.setTimeout(() => {
+        aviso.classList.remove("is-visible");
+    }, 3000);
 }
