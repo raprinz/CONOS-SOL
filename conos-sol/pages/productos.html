@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Productos | Conos Sol</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <a href="../index.html" class="logo-container">
+
+                <img
+                    src="../img/logo.png"
+                    alt="Conos Sol"
+                    class="logo"
+                >
+
+            </a>
+
+
+            <div class="search-container">
+
+                <input
+                    type="text"
+                    id="searchProducts"
+                    placeholder="Buscar productos..."
+                >
+
+                <button onclick="buscarProductos()">
+                    🔍
+                </button>
+
+            </div>
+
+
+            <nav class="header-actions">
+
+                <a href="nosotros.html">
+                    Nosotros
+                </a>
+
+                <a href="contacto.html">
+                    Contacto
+                </a>
+
+                <a href="carrito.html" class="cart-link">
+
+                    🛒 Carrito
+
+                    <span id="cartCounter">
+                        0
+                    </span>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- MENÚ PRINCIPAL -->
+
+    <nav class="main-nav">
+
+        <div class="nav-container">
+
+            <a href="../index.html">
+                Inicio
+            </a>
+
+            <a href="productos.html">
+                Productos
+            </a>
+
+            <a href="productos.html?categoria=conos">
+                Conos
+            </a>
+
+            <a href="productos.html?categoria=canastillas">
+                Canastillas
+            </a>
+
+            <a href="productos.html?categoria=barquillos">
+                Barquillos
+            </a>
+
+            <a href="productos.html?categoria=galletas">
+                Galletas
+            </a>
+
+            <a href="productos.html?categoria=obleas">
+                Obleas
+            </a>
+
+            <a href="productos.html?categoria=porta-cono">
+                Porta Cono
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- CONTENIDO -->
+
+    <main class="catalog-page">
+
+        <div class="breadcrumb">
+
+            <a href="../index.html">
+                Inicio
+            </a>
+
+            <span>›</span>
+
+            <span>
+                Productos
+            </span>
+
+        </div>
+
+
+        <div class="catalog-layout">
+
+
+            <!-- =========================
+                 CATEGORÍAS
+            ========================== -->
+
+            <aside class="sidebar">
+
+                <div class="sidebar-header">
+
+                    <h2>
+                        Categorías
+                    </h2>
+
+                </div>
+
+
+                <button
+                    class="category-button active"
+                    onclick="mostrarCategoria('todos')"
+                >
+                    Todos los productos
+                </button>
+
+
+                <button
+                    class="category-button"
+                    onclick="mostrarCategoria('conos')"
+                >
+                    🍦 Conos
+                </button>
+
+
+                <button
+                    class="category-button"
+                    onclick="mostrarCategoria('canastillas')"
+                >
+                    ​🍨​​ Canastillas
+                </button>
+
+
+                <button
+                    class="category-button"
+                    onclick="mostrarCategoria('barquillos')"
+                >
+                    🥢​​​ Barquillos
+                </button>
+
+
+                <button
+                    class="category-button"
+                    onclick="mostrarCategoria('galletas')"
+                >
+                    ❤️ Galletas decorativas
+                </button>
+
+
+                <button
+                    class="category-button"
+                    onclick="mostrarCategoria('obleas')"
+                >
+                    🍘​ Obleas
+                </button>
+
+
+                <button
+                    class="category-button"
+                    onclick="mostrarCategoria('porta-cono')"
+                >
+                    🍧​​ Porta Cono
+                </button>
+
+
+                <div class="sidebar-info">
+
+                    <h3>
+                        ¿Necesitas ayuda?
+                    </h3>
+
+                    <p>
+                        Comunícate con nosotros para solicitar
+                        información sobre nuestros productos.
+                    </p>
+
+                    <a href="contacto.html">
+                        Contactar
+                    </a>
+
+                </div>
+
+            </aside>
+
+
+            <!-- =========================
+                 CATÁLOGO
+            ========================== -->
+
+            <section class="catalog">
+
+                <div class="catalog-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            CATÁLOGO
+                        </span>
+
+                        <h1 id="tituloCategoria">
+                            Todos los productos
+                        </h1>
+
+                        <p id="cantidadProductos">
+                            Productos disponibles
+                        </p>
+
+                    </div>
+
+
+                    <div class="sort-container">
+
+                        <label for="ordenProductos">
+                            Ordenar:
+                        </label>
+
+                        <select
+                            id="ordenProductos"
+                            onchange="ordenarProductos()"
+                        >
+
+                            <option value="default">
+                                Recomendados
+                            </option>
+
+                            <option value="nombre">
+                                Nombre
+                            </option>
+
+                            <option value="categoria">
+                                Categoría
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="contenedorProductos"
+                    class="product-grid"
+                >
+                    <!-- JavaScript cargará los productos -->
+                </div>
+
+
+                <div
+                    id="noResults"
+                    class="no-results"
+                >
+
+                    <h2>
+                        No encontramos productos
+                    </h2>
+
+                    <p>
+                        Intenta buscar con otro nombre o selecciona
+                        una categoría diferente.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div>
+
+                <h3>
+                    Conos Sol
+                </h3>
+
+                <p>
+                    Productos artesanales para el sector alimenticio.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Enlaces
+                </h3>
+
+                <a href="../index.html">
+                    Inicio
+                </a>
+
+                <a href="nosotros.html">
+                    Nosotros
+                </a>
+
+                <a href="contacto.html">
+                    Contacto
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Categorías
+                </h3>
+
+                <a href="productos.html?categoria=conos">
+                    Conos
+                </a>
+
+                <a href="productos.html?categoria=canastillas">
+                    Canastillas
+                </a>
+
+                <a href="productos.html?categoria=galletas">
+                    Galletas
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Conos Sol
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/script.js"></script>
+
+</body>
+</html>

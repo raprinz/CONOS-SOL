@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Contacto | Conos Sol</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <a href="../index.html">
+
+                <img
+                    src="../img/logo.png"
+                    alt="Conos Sol"
+                    class="logo"
+                >
+
+            </a>
+
+
+            <nav class="header-actions">
+
+                <a href="../index.html">
+                    Inicio
+                </a>
+
+                <a href="productos.html">
+                    Productos
+                </a>
+
+                <a href="carrito.html">
+                    🛒 Carrito
+                    <span id="cartCounter">0</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <nav class="main-nav">
+
+        <div class="nav-container">
+
+            <a href="../index.html">
+                Inicio
+            </a>
+
+            <a href="productos.html">
+                Productos
+            </a>
+
+            <a href="nosotros.html">
+                Nosotros
+            </a>
+
+            <a href="contacto.html">
+                Contacto
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main>
+
+        <section class="page-banner">
+
+            <span>
+                CONOS SOL
+            </span>
+
+            <h1>
+                Contáctanos
+            </h1>
+
+            <p>
+                Estamos disponibles para atender tus solicitudes.
+            </p>
+
+        </section>
+
+
+        <section class="contact-section">
+
+
+            <div class="contact-info">
+
+                <span class="section-label">
+                    INFORMACIÓN
+                </span>
+
+                <h2>
+                    Ponte en contacto con nosotros
+                </h2>
+
+                <p>
+                    Si deseas conocer nuestros productos,
+                    solicitar una cotización o realizar un pedido,
+                    puedes comunicarte con nosotros.
+                </p>
+
+
+                <div class="contact-item">
+
+                    <span>
+                        📱
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            WhatsApp
+                        </h3>
+
+                        <p>
+                            Número de WhatsApp pendiente
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <span>
+                        ✉️
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Correo electrónico
+                        </h3>
+
+                        <p>
+                            Correo pendiente
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <span>
+                        📍
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Ubicación
+                        </h3>
+
+                        <p>
+                            Colombia
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-form-container">
+
+                <h2>
+                    Envíanos un mensaje
+                </h2>
+
+                <form
+                    id="contactForm"
+                    onsubmit="enviarFormulario(event)"
+                >
+
+                    <label for="nombre">
+                        Nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        required
+                    >
+
+
+                    <label for="telefono">
+                        Teléfono
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefono"
+                        required
+                    >
+
+
+                    <label for="correo">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        required
+                    >
+
+
+                    <label for="mensaje">
+                        Mensaje
+                    </label>
+
+                    <textarea
+                        id="mensaje"
+                        rows="5"
+                        required
+                    ></textarea>
+
+
+                    <button
+                        type="submit"
+                        class="btn-primary full-button"
+                    >
+                        Enviar mensaje
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Conos Sol
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

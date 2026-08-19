@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Carrito | Conos Sol</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <a href="../index.html">
+
+                <img
+                    src="../img/logo.png"
+                    alt="Conos Sol"
+                    class="logo"
+                >
+
+            </a>
+
+
+            <nav class="header-actions">
+
+                <a href="../index.html">
+                    Inicio
+                </a>
+
+                <a href="productos.html">
+                    Productos
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <nav class="main-nav">
+
+        <div class="nav-container">
+
+            <a href="../index.html">
+                Inicio
+            </a>
+
+            <a href="productos.html">
+                Productos
+            </a>
+
+            <a href="nosotros.html">
+                Nosotros
+            </a>
+
+            <a href="contacto.html">
+                Contacto
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="cart-page">
+
+        <div class="breadcrumb">
+
+            <a href="../index.html">
+                Inicio
+            </a>
+
+            <span>
+                ›
+            </span>
+
+            <span>
+                Carrito
+            </span>
+
+        </div>
+
+
+        <div class="section-title">
+
+            <span>
+                PEDIDO
+            </span>
+
+            <h1>
+                Mi carrito
+            </h1>
+
+        </div>
+
+
+        <div class="cart-layout">
+
+
+            <section>
+
+                <div
+                    id="cartItems"
+                    class="cart-items"
+                >
+                    <!-- JavaScript -->
+                </div>
+
+
+                <div
+                    id="emptyCart"
+                    class="empty-cart"
+                >
+
+                    <div>
+                        🛒
+                    </div>
+
+                    <h2>
+                        Tu carrito está vacío
+                    </h2>
+
+                    <p>
+                        Agrega productos para comenzar tu pedido.
+                    </p>
+
+                    <a
+                        href="productos.html"
+                        class="btn-primary"
+                    >
+                        Ver productos
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <aside class="cart-summary">
+
+                <h2>
+                    Resumen del pedido
+                </h2>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Productos
+                    </span>
+
+                    <strong id="summaryQuantity">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Total de unidades
+                    </span>
+
+                    <strong id="summaryUnits">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <hr>
+
+
+                <p class="order-note">
+                    El precio de los productos se confirmará
+                    directamente con Conos Sol según la cantidad
+                    y presentación solicitada.
+                </p>
+
+
+                <button
+                    onclick="generarPedidoWhatsApp()"
+                    class="btn-primary full-button"
+                >
+                    Solicitar pedido por WhatsApp
+                </button>
+
+
+                <button
+                    onclick="vaciarCarrito()"
+                    class="btn-danger full-button"
+                >
+                    Vaciar carrito
+                </button>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Conos Sol
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

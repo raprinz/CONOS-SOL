@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Conos Sol | Productos Artesanales</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         ENCABEZADO
+    ========================== -->
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <a href="index.html" class="logo-container">
+                <img src="img/logo.png" alt="Conos Sol" class="logo">
+            </a>
+
+            <div class="search-container">
+                <input
+                    type="text"
+                    id="searchHome"
+                    placeholder="Buscar productos..."
+                >
+
+                <button onclick="buscarDesdeInicio()">
+                    🔍
+                </button>
+            </div>
+
+            <nav class="header-actions">
+
+                <a href="pages/nosotros.html">
+                    Nosotros
+                </a>
+
+                <a href="pages/contacto.html">
+                    Contacto
+                </a>
+
+                <a href="pages/carrito.html" class="cart-link">
+                    🛒 Carrito
+                    <span id="cartCounter">0</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MENÚ PRINCIPAL
+    ========================== -->
+
+    <nav class="main-nav">
+
+        <div class="nav-container">
+
+            <a href="index.html">
+                Inicio
+            </a>
+
+            <a href="pages/productos.html">
+                Productos
+            </a>
+
+            <a href="pages/productos.html?categoria=conos">
+                Conos
+            </a>
+
+            <a href="pages/productos.html?categoria=canastillas">
+                Canastillas
+            </a>
+
+            <a href="pages/productos.html?categoria=barquillos">
+                Barquillos
+            </a>
+
+            <a href="pages/productos.html?categoria=galletas">
+                Galletas
+            </a>
+
+            <a href="pages/productos.html?categoria=obleas">
+                Obleas
+            </a>
+
+            <a href="pages/productos.html?categoria=porta-cono">
+                Porta Cono
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         BANNER PRINCIPAL
+    ========================== -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <span class="hero-tag">
+                    PRODUCTOS ARTESANALES
+                </span>
+
+                <h1>
+                    El sabor artesanal de Conos Sol
+                </h1>
+
+                <p>
+                    Conos, canastillas, barquillos, galletas decorativas,
+                    obleas y porta conos para heladerías y fruterías.
+                </p>
+
+                <a
+                    href="pages/productos.html"
+                    class="btn-primary"
+                >
+                    Ver catálogo
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CATEGORÍAS
+        ========================== -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <span>CATEGORÍAS</span>
+
+                <h2>
+                    Encuentra nuestros productos
+                </h2>
+
+            </div>
+
+
+            <div class="category-grid">
+
+                <a
+                    href="pages/productos.html?categoria=conos"
+                    class="category-card"
+                >
+
+                    <div class="category-icon">
+                        🍦​
+                    </div>
+
+                    <h3>
+                        Conos
+                    </h3>
+
+                    <p>
+                        Diferentes tamaños para helados.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="pages/productos.html?categoria=canastillas"
+                    class="category-card"
+                >
+
+                    <div class="category-icon">
+                        🍨​
+                    </div>
+
+                    <h3>
+                        Canastillas
+                    </h3>
+
+                    <p>
+                        Presentaciones para helados y postres.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="pages/productos.html?categoria=barquillos"
+                    class="category-card"
+                >
+
+                    <div class="category-icon">
+                        🥢​
+                    </div>
+
+                    <h3>
+                        Barquillos
+                    </h3>
+
+                    <p>
+                        Barquillos para decoración y consumo.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="pages/productos.html?categoria=galletas"
+                    class="category-card"
+                >
+
+                    <div class="category-icon">
+                        ❤️
+                    </div>
+
+                    <h3>
+                        Galletas decorativas
+                    </h3>
+
+                    <p>
+                        Galletas en forma de corazón y cuadradas.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="pages/productos.html?categoria=obleas"
+                    class="category-card"
+                >
+
+                    <div class="category-icon">
+                        ​🍘​
+                    </div>
+
+                    <h3>
+                        Obleas
+                    </h3>
+
+                    <p>
+                        Obleas artesanales.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="pages/productos.html?categoria=porta-cono"
+                    class="category-card"
+                >
+
+                    <div class="category-icon">
+                        🍧​
+                    </div>
+
+                    <h3>
+                        Porta Cono
+                    </h3>
+
+                    <p>
+                        Presentación higiénica para conos.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             INFORMACIÓN DE LA EMPRESA
+        ========================== -->
+
+        <section class="info-section">
+
+            <div>
+
+                <span class="section-label">
+                    CONOS SOL
+                </span>
+
+                <h2>
+                    Productos artesanales para tu negocio
+                </h2>
+
+                <p>
+                    Conos Sol fabrica productos artesanales dirigidos
+                    principalmente a heladerías, fruterías y establecimientos
+                    del sector alimenticio.
+                </p>
+
+                <a
+                    href="pages/nosotros.html"
+                    class="btn-secondary"
+                >
+                    Conocer la empresa
+                </a>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div>
+                    <strong>100%</strong>
+                    <span>Artesanal</span>
+                </div>
+
+                <div>
+                    <strong>INVIMA</strong>
+                    <span>Productos certificados</span>
+                </div>
+
+                <div>
+                    <strong>6+</strong>
+                    <span>Líneas de productos</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             DESTACADOS
+        ========================== -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <span>CATÁLOGO</span>
+
+                <h2>
+                    Algunos de nuestros productos
+                </h2>
+
+            </div>
+
+            <div
+                id="featuredProducts"
+                class="product-grid"
+            >
+                <!-- JavaScript -->
+            </div>
+
+            <div class="center-button">
+
+                <a
+                    href="pages/productos.html"
+                    class="btn-primary"
+                >
+                    Ver todos los productos
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         PIE DE PÁGINA
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div>
+
+                <h3>
+                    Conos Sol
+                </h3>
+
+                <p>
+                    Productos artesanales para heladerías,
+                    fruterías y negocios del sector alimenticio.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Navegación
+                </h3>
+
+                <a href="index.html">
+                    Inicio
+                </a>
+
+                <a href="pages/productos.html">
+                    Productos
+                </a>
+
+                <a href="pages/nosotros.html">
+                    Nosotros
+                </a>
+
+                <a href="pages/contacto.html">
+                    Contacto
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Productos
+                </h3>
+
+                <a href="pages/productos.html?categoria=conos">
+                    Conos
+                </a>
+
+                <a href="pages/productos.html?categoria=canastillas">
+                    Canastillas
+                </a>
+
+                <a href="pages/productos.html?categoria=barquillos">
+                    Barquillos
+                </a>
+
+                <a href="pages/productos.html?categoria=galletas">
+                    Galletas
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Contacto
+                </h3>
+
+                <p>
+                    WhatsApp
+                </p>
+
+                <p>
+                    Correo electrónico
+                </p>
+
+                <p>
+                    Colombia
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Conos Sol. Todos los derechos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
